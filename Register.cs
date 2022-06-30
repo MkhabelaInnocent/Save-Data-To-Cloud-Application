@@ -13,7 +13,7 @@ namespace Save_Data_To_Cloud
 {
     public partial class Register : Form
     {
-        SqlConnection con = new SqlConnection("");
+        SqlConnection con = new SqlConnection("Server=tcp:testing-innocent.database.windows.net,1433;Initial Catalog=Save-To-Cloud;Persist Security Info=False;User ID=Innocent;Password=************;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
         public Register()
         {
             InitializeComponent();
@@ -44,7 +44,13 @@ namespace Save_Data_To_Cloud
             try
             {
                 con.Open();
-                SqlCommand com = new SqlCommand("", con);
+                string Citizen;
+                if (saRd.Checked)
+
+                    Citizen = "SA";
+                else
+                    Citizen = "Non SA";
+                SqlCommand com = new SqlCommand(""INSERT INTO Member VALUES('"+fnameT.Text+"','"+lnameT.Text+"','"+emailT.Text+"','"+addressRtxb.Text+"','"+genderCmb.SelectedItem.ToString()+"','"+datePicker.Value+"','"+ageS.Value+"','"+ Citizen+"')"", con);
                 try
                 {
                     com.ExecuteNonQuery();
